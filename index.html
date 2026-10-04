@@ -43,8 +43,6 @@ ul{list-style:none}
 .icon-btn{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--muted);transition:all var(--transition);background:var(--hover-bg);border:1px solid var(--border)}
 .icon-btn:hover{color:var(--text);background:var(--hover-bg-2);border-color:var(--border-strong)}
 .icon-btn svg{width:19px;height:19px}
-.icon-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.icon-btn.primary:hover{background:var(--accent-hover)}
 .avatar-btn{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff;font-weight:700;font-size:.85rem;transition:all var(--transition);flex-shrink:0;border:2px solid transparent}
 .avatar-btn:hover{border-color:var(--accent);transform:scale(1.05)}
 .hamburger{display:none}
@@ -117,6 +115,8 @@ main{padding-top:var(--header-h)}
 .card-rating{position:absolute;top:9px;left:9px;z-index:3;padding:4px 8px;border-radius:8px;background:var(--badge);backdrop-filter:blur(8px);border:1px solid var(--border);font-size:.74rem;font-weight:700;display:inline-flex;align-items:center;gap:4px;color:var(--rating)}
 .card-rating svg{width:12px;height:12px}
 .card-new{position:absolute;top:9px;right:9px;z-index:3;padding:3px 8px;border-radius:6px;background:var(--accent);color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.8px}
+.card-video{position:absolute;bottom:9px;left:9px;z-index:3;padding:4px 9px;border-radius:8px;background:rgba(52,211,153,.9);color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.5px;display:inline-flex;align-items:center;gap:4px;backdrop-filter:blur(6px)}
+.card-video svg{width:11px;height:11px}
 .card-fav{position:absolute;bottom:9px;right:9px;z-index:3;width:34px;height:34px;border-radius:50%;background:var(--badge-2);backdrop-filter:blur(8px);border:1px solid var(--border-strong);display:grid;place-items:center;color:var(--text);transition:all var(--transition);opacity:0;transform:translateY(6px)}
 .card:hover .card-fav{opacity:1;transform:translateY(0)}
 .card-fav:hover,.card-fav.active{background:var(--accent);border-color:var(--accent);color:#fff}
@@ -178,13 +178,28 @@ main{padding-top:var(--header-h)}
 .modal.open{opacity:1;pointer-events:auto}
 .modal-inner{width:100%;max-width:960px;background:var(--surface);border-radius:var(--radius-lg);border:1px solid var(--border-strong);overflow:hidden;position:relative;transform:scale(.94) translateY(14px);transition:transform .35s cubic-bezier(.34,1.4,.64,1);max-height:92vh;display:flex;flex-direction:column}
 .modal.open .modal-inner{transform:scale(1) translateY(0)}
-.modal-close{position:absolute;top:14px;right:14px;z-index:10;width:40px;height:40px;border-radius:50%;background:var(--badge-2);backdrop-filter:blur(10px);border:1px solid var(--border-strong);display:grid;place-items:center;color:var(--text);transition:all var(--transition)}
+.modal-close{position:absolute;top:14px;right:14px;z-index:50;width:42px;height:42px;border-radius:50%;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;color:#fff;transition:all var(--transition);cursor:pointer}
 .modal-close:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:rotate(90deg)}
-.modal-close svg{width:18px;height:18px}
+.modal-close svg{width:20px;height:20px;pointer-events:none}
+.modal-close *{pointer-events:none}
+
+/* Trailer */
 .trailer-modal .modal-inner{max-width:1000px;background:#000}
 .trailer-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
 .trailer-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .trailer-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:16/9;color:var(--muted);gap:12px;padding:30px;text-align:center}
+
+/* Video Player */
+.player-modal .modal-inner{max-width:1280px;background:#000}
+.player-frame{position:relative;width:100%;background:#000}
+.player-frame video{width:100%;max-height:80vh;display:block;background:#000}
+.player-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:16/9;color:#9296A5;gap:12px;padding:30px;text-align:center}
+.player-fallback h3{color:#fff;font-weight:700;font-size:1.05rem}
+.player-title-bar{padding:14px 20px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--border)}
+.player-title-bar h3{font-size:1rem;font-weight:800;letter-spacing:-.2px}
+.player-title-bar p{font-size:.8rem;color:var(--muted)}
+.video-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:100px;background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.4);color:#34d399;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
 
 /* Details */
 .details-hero{position:relative;min-height:340px;background-size:cover;background-position:center;background-color:var(--surface-2);display:flex;align-items:flex-end;flex-shrink:0}
@@ -212,8 +227,9 @@ main{padding-top:var(--header-h)}
 /* Rating widget */
 .rating-widget{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:16px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:22px}
 .stars{display:flex;gap:3px}
-.star{width:28px;height:28px;color:var(--muted-2);cursor:pointer;transition:all .15s}
+.star{width:26px;height:26px;color:var(--muted-2);cursor:pointer;transition:all .15s}
 .star:hover,.star.filled{color:var(--rating);transform:scale(1.1)}
+.star svg{width:100%;height:100%}
 .rating-summary{font-size:.88rem;color:var(--muted)}
 .rating-summary b{color:var(--text);font-weight:700}
 
@@ -231,7 +247,7 @@ main{padding-top:var(--header-h)}
 .comment-text{font-size:.88rem;color:var(--muted);line-height:1.55;padding-left:42px}
 .comment-delete{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:6px;color:var(--muted-2);display:grid;place-items:center}
 .comment-delete:hover{background:var(--accent-soft);color:var(--accent)}
-.comment-delete svg{width:14px;height:14px}
+.comment-delete svg{width:14px;height:14px;pointer-events:none}
 .comments-empty{color:var(--muted);font-size:.88rem;text-align:center;padding:16px}
 
 /* Empty state */
@@ -262,7 +278,6 @@ main{padding-top:var(--header-h)}
 .theme-option svg{width:15px;height:15px}
 .theme-option.active{background:var(--accent);color:#fff}
 .badge-admin{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:var(--ok);color:#fff;font-size:.7rem;font-weight:800;letter-spacing:.5px}
-[data-theme="light"] .badge-admin{color:#fff}
 
 /* Toast */
 .toast-container{position:fixed;bottom:24px;right:24px;z-index:2000;display:flex;flex-direction:column;gap:10px;pointer-events:none}
@@ -297,7 +312,7 @@ main{padding-top:var(--header-h)}
 .file-preview{margin-top:10px;max-height:140px;border-radius:8px;object-fit:cover;margin-left:auto;margin-right:auto}
 .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
 .modal-body-form{padding:24px 28px;overflow-y:auto;flex:1}
-.modal-title-bar{padding:20px 28px 0;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.modal-title-bar{padding:20px 28px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 /* Footer */
 .footer{margin-top:60px;padding:40px 0 30px;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem}
@@ -343,6 +358,7 @@ main{padding-top:var(--header-h)}
   .genre-card{min-height:105px;padding:16px}.genre-card h4{font-size:1rem}
   .settings-row{flex-direction:column;align-items:flex-start}
   .modal-body-form{padding:18px}.modal-title-bar{padding:16px 18px 0}
+  .modal-close{width:38px;height:38px;top:10px;right:10px}
 }
 @media (max-width:380px){.card{width:142px}.grid{grid-template-columns:repeat(2,1fr);gap:12px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
@@ -401,6 +417,7 @@ main{padding-top:var(--header-h)}
         <div class="hero-meta" id="heroMeta"></div>
         <p class="hero-desc" id="heroDesc"></p>
         <div class="hero-actions">
+          <button class="btn btn-primary" id="heroPlay" style="display:none"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>▶ پخش فیلم</button>
           <button class="btn btn-primary" id="heroTrailer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch Trailer</button>
           <button class="btn btn-ghost" id="heroDetails"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>More Details</button>
           <button class="btn btn-outline" id="heroWatchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9-9.5C1.5 8 4 5 7 5c2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 3 0 5.5 3 4 6.5-2 5-9 9.5-9 9.5z"/></svg>Add to Watchlist</button>
@@ -512,23 +529,31 @@ main{padding-top:var(--header-h)}
 <!-- Trailer modal -->
 <div class="modal trailer-modal" id="trailerModal">
   <div class="modal-inner">
-    <button class="modal-close" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <button class="modal-close" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div id="trailerContent"></div>
+  </div>
+</div>
+
+<!-- Player modal -->
+<div class="modal player-modal" id="playerModal">
+  <div class="modal-inner">
+    <button class="modal-close" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div id="playerContent"></div>
   </div>
 </div>
 
 <!-- Details modal -->
 <div class="modal" id="detailsModal">
   <div class="modal-inner">
-    <button class="modal-close" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <button class="modal-close" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div id="detailsContent" style="overflow-y:auto;flex:1"></div>
   </div>
 </div>
 
-<!-- Add / Edit movie modal -->
+<!-- Movie form modal -->
 <div class="modal" id="movieFormModal">
   <div class="modal-inner">
-    <button class="modal-close" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <button class="modal-close" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div class="modal-title-bar"><h2 class="section-title" id="movieFormTitle"><span class="bar"></span>Add New Movie</h2></div>
     <form class="modal-body-form" id="movieForm">
       <div class="form-grid">
@@ -544,7 +569,20 @@ main{padding-top:var(--header-h)}
         <div class="form-field"><label for="mfCast">Cast (comma-separated)</label><input id="mfCast" name="cast" maxlength="300"></div>
         <div class="form-field"><label for="mfLanguage">Language</label><input id="mfLanguage" name="language" value="English"></div>
         <div class="form-field"><label for="mfCountry">Country</label><input id="mfCountry" name="country"></div>
-        <div class="form-field full"><label for="mfTrailer">YouTube Trailer ID (e.g. YoHD9XEInc0)</label><input id="mfTrailer" name="trailer" maxlength="30"></div>
+        <div class="form-field full"><label for="mfTrailer">YouTube Trailer ID</label><input id="mfTrailer" name="trailer" maxlength="30" placeholder="مثلاً: YoHD9XEInc0"></div>
+        <div class="form-field full">
+          <label>🎬 فایل ویدیوی فیلم (MP4 / WebM / MKV — حداکثر ۵۰۰ مگابایت)</label>
+          <div class="file-drop">
+            <input type="file" name="video" accept="video/*" id="mfVideoInput">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m10 9 5 3-5 3z"/></svg>
+            <p>فایل ویدیویی رو بکش و رها کن، یا کلیک کن</p>
+            <p id="videoInfo" style="font-size:.75rem;color:var(--accent-text);margin-top:6px;display:none"></p>
+          </div>
+        </div>
+        <div class="form-field full">
+          <label>یا لینک ویدیو (MP4/WebM مستقیم یا YouTube ID)</label>
+          <input id="mfVideoUrl" name="videoUrl" placeholder="https://example.com/movie.mp4  یا  dQw4w9WgXcQ">
+        </div>
         <div class="form-field"><label>Poster Image</label>
           <div class="file-drop">
             <input type="file" name="poster" accept="image/*" data-preview="posterPreview">
@@ -576,7 +614,7 @@ main{padding-top:var(--header-h)}
 <!-- Login modal -->
 <div class="modal" id="loginModal">
   <div class="modal-inner" style="max-width:420px">
-    <button class="modal-close" data-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <button class="modal-close" data-close aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div class="modal-title-bar"><h2 class="section-title"><span class="bar"></span>Admin Login</h2></div>
     <form class="modal-body-form" id="loginForm">
       <div class="form-field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" required autocomplete="current-password"></div>
@@ -592,7 +630,7 @@ main{padding-top:var(--header-h)}
 
 <script>
 /* =========================================================
-   MovieHub Frontend
+   MovieHub Frontend — with Video Player
    ========================================================= */
 const API = location.origin + "/api";
 const $ = (s, r=document) => r.querySelector(s);
@@ -609,8 +647,7 @@ const GENRES = [
 const FALLBACK_IMG = "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450"><rect width="300" height="450" fill="#12141B"/><rect x="20" y="20" width="260" height="410" fill="#1B1E28" rx="12"/><text x="150" y="240" text-anchor="middle" fill="#9296A5" font-family="sans-serif" font-size="16">No Poster</text></svg>`);
 const FALLBACK_BACKDROP = "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12141B"/><stop offset="1" stop-color="#08090D"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g)"/><circle cx="640" cy="360" r="120" fill="#E50935" opacity=".15"/></svg>`);
 
-/* ---------- State ---------- */
-let MOVIES = [];   // loaded from backend
+let MOVIES = [];
 let ADMIN_TOKEN = null;
 let DEVICE_ID = getOrCreateDeviceId();
 
@@ -621,30 +658,25 @@ const state = {
 
 function getOrCreateDeviceId(){
   let id = localStorage.getItem("moviehub_device");
-  if(!id){ id = "d_" + Math.random().toString(36).slice(2,10) + Date.now().toString(36); localStorage.setItem("moviehub_device", id); }
+  if(!id){ id = "d_"+Math.random().toString(36).slice(2,10)+Date.now().toString(36); localStorage.setItem("moviehub_device", id); }
   return id;
 }
 function loadPrefs(){
   try{
-    const wl = JSON.parse(localStorage.getItem("moviehub_watchlist_v1") || "[]");
-    if(Array.isArray(wl)) state.watchlist = wl.filter(x => typeof x === "number");
+    const wl = JSON.parse(localStorage.getItem("moviehub_watchlist_v1")||"[]");
+    if(Array.isArray(wl)) state.watchlist = wl.filter(x=>typeof x === "number");
   }catch{}
   try{
-    const p = JSON.parse(localStorage.getItem("moviehub_prefs_v2") || "{}");
+    const p = JSON.parse(localStorage.getItem("moviehub_prefs_v2")||"{}");
     if(typeof p.reducedMotion === "boolean") state.reducedMotion = p.reducedMotion;
     if(p.theme === "light" || p.theme === "dark") state.theme = p.theme;
     else state.theme = window.matchMedia?.("(prefers-color-scheme: light)").matches ? "light" : "dark";
     if(p.adminToken) ADMIN_TOKEN = p.adminToken;
   }catch{}
 }
-function savePrefs(){
-  localStorage.setItem("moviehub_prefs_v2", JSON.stringify({reducedMotion:state.reducedMotion, theme:state.theme, adminToken:ADMIN_TOKEN}));
-}
-function saveWatchlist(){
-  localStorage.setItem("moviehub_watchlist_v1", JSON.stringify(state.watchlist));
-}
+function savePrefs(){ localStorage.setItem("moviehub_prefs_v2", JSON.stringify({reducedMotion:state.reducedMotion, theme:state.theme, adminToken:ADMIN_TOKEN})); }
+function saveWatchlist(){ localStorage.setItem("moviehub_watchlist_v1", JSON.stringify(state.watchlist)); }
 
-/* ---------- Utils ---------- */
 function escapeHtml(s){ return s==null?"":String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function starSvg(){ return '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9.2 9.3 1.5 10l5.8 5-1.7 7.5L12 18.7 18.4 22.5 16.7 15l5.8-5-7.7-.7z"/></svg>'; }
 function timeAgo(ts){
@@ -654,6 +686,7 @@ function timeAgo(ts){
   if(d<86400) return Math.floor(d/3600)+"h ago";
   return Math.floor(d/86400)+"d ago";
 }
+function isYouTubeId(s){ return s && s.length === 11 && !s.includes("/") && !s.includes(".") && !s.startsWith("http"); }
 
 /* ---------- Toast ---------- */
 function toast(msg, type="info"){
@@ -690,9 +723,9 @@ async function loadMovies(){
     MOVIES = await api("/movies");
     if(!Array.isArray(MOVIES)) MOVIES = [];
   }catch(e){
-    console.warn("Backend unavailable, using empty list:", e.message);
+    console.warn("Backend unavailable:", e.message);
     MOVIES = [];
-    toast("Backend not reachable — running offline", "error");
+    toast("Backend not reachable", "error");
   }
 }
 
@@ -700,6 +733,7 @@ async function loadMovies(){
 function movieCardHTML(m){
   const inWL = state.watchlist.includes(m.id);
   const newBadge = m.isNew ? '<span class="card-new">NEW</span>' : "";
+  const videoBadge = m.video ? '<span class="card-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>فلم</span>' : "";
   const g = (m.genres && m.genres[0]) ? `<span class="card-genre">${escapeHtml(m.genres[0])}</span>` : "";
   const rating = (m.avgRating && m.avgRating > 0) ? m.avgRating : (m.rating||0);
   const poster = m.poster || FALLBACK_IMG;
@@ -708,6 +742,7 @@ function movieCardHTML(m){
       <img src="${poster}" alt="${escapeHtml(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK_IMG}'">
       <span class="card-rating">${starSvg()}${Number(rating).toFixed(1)}</span>
       ${newBadge}
+      ${videoBadge}
       <button class="card-fav ${inWL?'active':''}" data-fav="${m.id}" aria-label="Watchlist">
         <svg viewBox="0 0 24 24" fill="${inWL?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9-9.5C1.5 8 4 5 7 5c2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 3 0 5.5 3 4 6.5-2 5-9 9.5-9 9.5z"/></svg>
       </button>
@@ -731,12 +766,21 @@ function renderGrid(c, arr, emptyMsg="No movies found"){
 /* ---------- Home ---------- */
 function renderHome(){
   if(!MOVIES.length){
-    ["trendingRow","newRow","topRow"].forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML=""; });
-    $("#popularGrid").innerHTML = "";
     $("#heroTitle").textContent = "No movies yet";
-    $("#heroDesc").textContent = "Add your first movie from the admin panel to get started.";
+    $("#heroDesc").textContent = "Login as admin and add your first movie.";
+    $("#heroPlay").style.display = "none";
+    $("#heroTrailer").style.display = "none";
+    $("#heroDetails").style.display = "none";
+    $("#heroWatchlist").style.display = "none";
+    ["trendingRow","newRow","topRow"].forEach(id=>{const el=document.getElementById(id); if(el) el.innerHTML="";});
+    $("#popularGrid").innerHTML = "";
+    renderGenreGrid($("#genreGridHome"), true);
     return;
   }
+  $("#heroTrailer").style.display = "";
+  $("#heroDetails").style.display = "";
+  $("#heroWatchlist").style.display = "";
+
   const feat = [...MOVIES].sort((a,b)=>(b.popularity||0)-(a.popularity||0))[0];
   const heroBg = $("#heroBg");
   const bi = new Image();
@@ -755,6 +799,13 @@ function renderHome(){
     ${feat.language?`<span class="pill">${escapeHtml(feat.language)}</span>`:""}
     ${feat.views?`<span class="pill">👁 ${feat.views}</span>`:""}
   `;
+
+  const playBtn = $("#heroPlay");
+  if(feat.video){
+    playBtn.style.display = "";
+    playBtn.onclick = () => openPlayer(feat.id);
+  } else playBtn.style.display = "none";
+
   $("#heroTrailer").onclick = () => openTrailer(feat.id);
   $("#heroDetails").onclick = () => openDetails(feat.id);
   $("#heroWatchlist").onclick = () => toggleWatchlist(feat.id);
@@ -769,8 +820,8 @@ function renderHome(){
 /* ---------- Genre grid ---------- */
 function renderGenreGrid(c, small=false){
   if(!c) return;
-  c.innerHTML = GENRES.map(g => {
-    const n = MOVIES.filter(m => m.genres?.includes(g.name)).length;
+  c.innerHTML = GENRES.map(g=>{
+    const n = MOVIES.filter(m=>m.genres?.includes(g.name)).length;
     return `<div class="genre-card" data-genre="${escapeHtml(g.name)}" style="--g1:${g.g1};--g2:${g.g2};${small?"":"min-height:150px"}"><h4>${escapeHtml(g.name)}</h4><p>${n} titles</p></div>`;
   }).join("");
 }
@@ -801,14 +852,10 @@ function renderMoviesView(){
   $("#moviesCount").textContent = `${list.length} title${list.length!==1?"s":""}`;
   renderGrid($("#moviesGrid"), list, "Try adjusting your filters.");
 }
-
-/* ---------- Top rated ---------- */
 function renderTopRatedView(){
   const list = [...MOVIES].sort((a,b)=>((b.avgRating||b.rating)||0)-((a.avgRating||a.rating)||0));
   renderGrid($("#topRatedGrid"), list);
 }
-
-/* ---------- Genres view ---------- */
 function renderGenresView(){
   renderGenreGrid($("#genreGridFull"), false);
   if(state.activeGenre) renderGenrePick(state.activeGenre);
@@ -819,11 +866,9 @@ function renderGenrePick(g){
   $("#genrePickTitle").innerHTML = `<span class="bar"></span>${escapeHtml(g)} · ${list.length} titles`;
   renderGrid($("#genrePickGrid"), list);
 }
-
-/* ---------- Watchlist ---------- */
 function renderWatchlistView(){
   const c = $("#watchlistContainer");
-  const movies = state.watchlist.map(id => MOVIES.find(m=>m.id===id)).filter(Boolean);
+  const movies = state.watchlist.map(id=>MOVIES.find(m=>m.id===id)).filter(Boolean);
   $("#watchlistCount").textContent = `${movies.length} saved title${movies.length!==1?"s":""}`;
   if(!movies.length){
     c.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-4.5-9-9.5C1.5 8 4 5 7 5c2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 3 0 5.5 3 4 6.5-2 5-9 9.5-9 9.5z"/></svg><h3>Your watchlist is empty</h3><p>Tap the heart on any movie to save it here.</p><button class="btn btn-primary" data-view="movies">Browse Movies</button></div>`;
@@ -832,7 +877,7 @@ function renderWatchlistView(){
   c.innerHTML = `<div class="grid">${movies.map(movieCardHTML).join("")}</div>`;
 }
 
-/* ---------- Watchlist toggling ---------- */
+/* ---------- Watchlist ---------- */
 function toggleWatchlist(id){
   const m = MOVIES.find(x=>x.id===id);
   if(!m) return;
@@ -849,11 +894,12 @@ function toggleWatchlist(id){
   if(state.view === "watchlist") renderWatchlistView();
 }
 function renderAllWatchlistButtons(){
-  $$(".card-fav").forEach(btn => {
+  $$(".card-fav").forEach(btn=>{
     const id = Number(btn.dataset.fav);
     const active = state.watchlist.includes(id);
     btn.classList.toggle("active", active);
-    btn.querySelector("svg")?.setAttribute("fill", active ? "currentColor" : "none");
+    const svg = btn.querySelector("svg");
+    if(svg) svg.setAttribute("fill", active ? "currentColor" : "none");
   });
 }
 function updateStats(){
@@ -875,7 +921,6 @@ async function renderProfile(){
   const btn = $("#toggleMotion");
   if(btn) btn.textContent = state.reducedMotion ? "On" : "Off";
   $$("#profileThemeSwitch .theme-option").forEach(b=>b.classList.toggle("active",b.dataset.themeSet===state.theme));
-  // Admin UI state
   $("#adminBtn").textContent = ADMIN_TOKEN ? "Logout" : "Login";
   $("#adminTitle").textContent = ADMIN_TOKEN ? "Signed in as Admin" : "Admin Login";
   $("#adminSub").textContent = ADMIN_TOKEN ? "You can add, edit and delete movies." : "Sign in to add, edit or delete movies.";
@@ -908,7 +953,7 @@ function openTrailer(id){
   if(!m) return;
   const c = $("#trailerContent");
   if(m.trailer){
-    c.innerHTML = `<div class="trailer-frame"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(m.trailer)}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+    c.innerHTML = `<div class="trailer-frame"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(m.trailer)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe></div>`;
   } else {
     c.innerHTML = `<div class="trailer-fallback"><h3 style="color:#fff">Trailer unavailable</h3><p>No trailer for "${escapeHtml(m.title)}".</p></div>`;
   }
@@ -916,12 +961,44 @@ function openTrailer(id){
 }
 function closeTrailer(){ $("#trailerContent").innerHTML=""; }
 
+/* ---------- Video Player ---------- */
+function openPlayer(id){
+  const m = MOVIES.find(x=>x.id===id);
+  if(!m || !m.video) return;
+  const c = $("#playerContent");
+  let src = m.video;
+
+  if(isYouTubeId(src)){
+    c.innerHTML = `
+      <div class="player-frame">
+        <iframe src="https://www.youtube.com/embed/${encodeURIComponent(src)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      </div>
+      <div class="player-title-bar"><div><h3>${escapeHtml(m.title)}</h3><p>${m.year} · ${m.duration||"—"} min</p></div><span class="video-badge">YouTube</span></div>`;
+  } else if(/\.(mp4|webm|mkv|m4v|ogg|mov)(\?|$)/i.test(src) || src.startsWith("/uploads/") || src.startsWith("http")){
+    c.innerHTML = `
+      <div class="player-frame">
+        <video controls autoplay playsinline preload="metadata" id="movieVideo">
+          <source src="${src}" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div class="player-title-bar"><div><h3>${escapeHtml(m.title)}</h3><p>${m.year} · ${m.duration||"—"} min</p></div><span class="video-badge">HD</span></div>`;
+  } else {
+    c.innerHTML = `<div class="player-fallback"><h3>Invalid video source</h3><p>لینک ویدیو نامعتبره.</p></div>`;
+  }
+  openModal("#playerModal");
+}
+function closePlayer(){
+  const v = document.getElementById("movieVideo");
+  if(v){ v.pause(); v.src = ""; }
+  $("#playerContent").innerHTML = "";
+}
+
 /* ---------- Details ---------- */
 async function openDetails(id){
   const m = MOVIES.find(x=>x.id===id);
   if(!m) return;
   state.currentMovieId = id;
-  // view increment (fire-and-forget)
   api(`/movies/${id}/view`, {method:"POST"}).catch(()=>{});
   m.views = (m.views||0)+1;
 
@@ -951,7 +1028,8 @@ async function openDetails(id){
     </div>
     <div class="details-body">
       <div class="details-actions">
-        ${m.trailer?`<button class="btn btn-primary" id="detailsTrailer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Trailer</button>`:""}
+        ${m.video?`<button class="btn btn-primary" id="detailsPlay" style="background:#0f9e6a"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>▶ پخش فیلم</button>`:""}
+        ${m.trailer?`<button class="btn ${m.video?'btn-outline':'btn-primary'}" id="detailsTrailer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Trailer</button>`:""}
         <button class="btn ${inWL?'btn-primary':'btn-outline'}" id="detailsWatchlist">
           <svg viewBox="0 0 24 24" fill="${inWL?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9-9.5C1.5 8 4 5 7 5c2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 3 0 5.5 3 4 6.5-2 5-9 9.5-9 9.5z"/></svg>
           <span>${inWL?"In Watchlist":"Add to Watchlist"}</span>
@@ -983,61 +1061,59 @@ async function openDetails(id){
     </div>
   `;
 
-  // backdrop
   const h = $("#detailsHero");
   const bi = new Image();
   bi.onload = () => h.style.backgroundImage = `url('${m.backdrop}')`;
   bi.onerror = () => h.style.backgroundImage = `url('${FALLBACK_BACKDROP}')`;
   bi.src = m.backdrop || FALLBACK_BACKDROP;
 
-  // wire buttons
-  $("#detailsTrailer") && ($("#detailsTrailer").onclick = () => { closeModal("#detailsModal"); openTrailer(id); });
-  $("#detailsWatchlist").onclick = () => {
+  // Wire buttons (use optional chaining for safety)
+  const dt = $("#detailsTrailer"); if(dt) dt.onclick = () => { closeModal("#detailsModal"); openTrailer(id); };
+  const dp = $("#detailsPlay"); if(dp) dp.onclick = () => { closeModal("#detailsModal"); setTimeout(()=>openPlayer(id), 150); };
+  const dw = $("#detailsWatchlist"); if(dw) dw.onclick = () => {
     toggleWatchlist(id);
     const active = state.watchlist.includes(id);
-    const b = $("#detailsWatchlist");
-    b.classList.toggle("btn-primary", active);
-    b.classList.toggle("btn-outline", !active);
-    b.querySelector("span").textContent = active ? "In Watchlist" : "Add to Watchlist";
-    b.querySelector("svg").setAttribute("fill", active ? "currentColor" : "none");
+    dw.classList.toggle("btn-primary", active);
+    dw.classList.toggle("btn-outline", !active);
+    dw.querySelector("span").textContent = active ? "In Watchlist" : "Add to Watchlist";
+    dw.querySelector("svg").setAttribute("fill", active ? "currentColor" : "none");
   };
-  $("#detailsEdit") && ($("#detailsEdit").onclick = () => { closeModal("#detailsModal"); openMovieForm(m); });
-  $("#detailsDelete") && ($("#detailsDelete").onclick = async () => {
+  const de = $("#detailsEdit"); if(de) de.onclick = () => { closeModal("#detailsModal"); setTimeout(()=>openMovieForm(m), 150); };
+  const dd = $("#detailsDelete"); if(dd) dd.onclick = async () => {
     if(!confirm(`Delete "${m.title}"? This cannot be undone.`)) return;
     try{
       await api(`/movies/${id}`, {method:"DELETE"});
       toast("Movie deleted", "success");
       closeModal("#detailsModal");
       await loadMovies();
-      renderHome(); updateStats();
+      renderHome(); updateStats(); renderAllWatchlistButtons();
     }catch(e){ toast(e.message, "error"); }
-  });
+  };
 
   // Stars
-  const savedRating = JSON.parse(localStorage.getItem("moviehub_ratings")||"{}")[id]||0;
+  const savedRatings = JSON.parse(localStorage.getItem("moviehub_ratings")||"{}");
+  const savedRating = savedRatings[id]||0;
   const stars = $$("#starRow .star");
   const paint = v => stars.forEach(s => s.classList.toggle("filled", Number(s.dataset.val) <= v));
   paint(savedRating);
-  stars.forEach(s => {
+  stars.forEach(s=>{
     s.onmouseenter = () => paint(Number(s.dataset.val));
     s.onmouseleave = () => paint(savedRating);
     s.onclick = async () => {
       const val = Number(s.dataset.val);
       try{
         const r = await api(`/movies/${id}/rate`, {method:"POST", body:JSON.stringify({deviceId:DEVICE_ID, value:val})});
-        const ratings = JSON.parse(localStorage.getItem("moviehub_ratings")||"{}");
-        ratings[id] = val;
-        localStorage.setItem("moviehub_ratings", JSON.stringify(ratings));
+        savedRatings[id] = val;
+        localStorage.setItem("moviehub_ratings", JSON.stringify(savedRatings));
         paint(val);
         $("#ratingSummary").innerHTML = `Average: <b>${Number(r.avg).toFixed(1)}</b> · ${r.count} votes`;
-        const m = MOVIES.find(x=>x.id===id);
-        if(m){ m.avgRating = r.avg; m.ratingCount = r.count; }
-        toast("Rating saved — thanks!", "success");
+        const mm = MOVIES.find(x=>x.id===id);
+        if(mm){ mm.avgRating = r.avg; mm.ratingCount = r.count; }
+        toast("Rating saved", "success");
       }catch(e){ toast(e.message, "error"); }
     };
   });
 
-  // Comment form
   $("#commentForm").onsubmit = async e => {
     e.preventDefault();
     const name = $("#commentName").value.trim() || "Guest";
@@ -1047,9 +1123,9 @@ async function openDetails(id){
       await api(`/movies/${id}/comments`, {method:"POST", body:JSON.stringify({name, text, deviceId:DEVICE_ID})});
       $("#commentText").value = "";
       toast("Comment posted", "success");
-      loadComments(id);
       const mm = MOVIES.find(x=>x.id===id); if(mm) mm.commentCount = (mm.commentCount||0)+1;
       $("#commentsCount").textContent = MOVIES.find(x=>x.id===id)?.commentCount || 0;
+      loadComments(id);
     }catch(e){ toast(e.message, "error"); }
   };
 
@@ -1066,7 +1142,7 @@ async function loadComments(movieId){
     list.innerHTML = comments.map(c=>`
       <div class="comment-item" data-cid="${c.id}">
         <div class="comment-head">
-          <div class="comment-avatar">${escapeHtml(c.name.charAt(0).toUpperCase())}</div>
+          <div class="comment-avatar">${escapeHtml((c.name||"?").charAt(0).toUpperCase())}</div>
           <div class="comment-name">${escapeHtml(c.name)}</div>
           <div class="comment-date">${timeAgo(c.at)}</div>
           ${ADMIN_TOKEN?`<button class="comment-delete" data-cdel="${c.id}" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>`:""}
@@ -1077,12 +1153,18 @@ async function loadComments(movieId){
   }catch(e){ list.innerHTML = `<p class="comments-empty">Could not load comments.</p>`; }
 }
 
-/* ---------- Modals ---------- */
+/* ---------- Modal management ---------- */
 function openModal(sel){ const el = $(sel); if(el){ el.classList.add("open"); document.body.style.overflow = "hidden"; } }
 function closeModal(sel){
   const el = $(sel); if(!el) return;
-  el.classList.remove("open"); document.body.style.overflow = "";
+  el.classList.remove("open");
   if(sel === "#trailerModal") closeTrailer();
+  if(sel === "#playerModal") closePlayer();
+  // only unlock scroll if no other modal is open
+  if(!document.querySelector(".modal.open")) document.body.style.overflow = "";
+}
+function closeAllModals(){
+  $$(".modal.open").forEach(m => closeModal("#" + m.id));
 }
 
 /* ---------- Add/Edit movie form ---------- */
@@ -1092,6 +1174,8 @@ function openMovieForm(existing=null){
   f.reset();
   $("#posterPreview").style.display = "none";
   $("#backdropPreview").style.display = "none";
+  $("#videoInfo").style.display = "none";
+  $("#mfVideoUrl").value = "";
   $("#movieFormTitle").innerHTML = `<span class="bar"></span>${existing?"Edit Movie":"Add New Movie"}`;
   $("#movieFormSubmit").textContent = existing ? "Update Movie" : "Save Movie";
   f.dataset.editId = existing ? existing.id : "";
@@ -1114,6 +1198,14 @@ function openMovieForm(existing=null){
     $("#mfIsNew").checked = !!existing.isNew;
     if(existing.poster){ $("#posterPreview").src = existing.poster; $("#posterPreview").style.display="block"; }
     if(existing.backdrop){ $("#backdropPreview").src = existing.backdrop; $("#backdropPreview").style.display="block"; }
+    if(existing.video){
+      if(isYouTubeId(existing.video) || existing.video.startsWith("http")){
+        $("#mfVideoUrl").value = existing.video;
+      } else {
+        $("#videoInfo").textContent = "🎥 ویدیوی فعلی: " + existing.video.split("/").pop();
+        $("#videoInfo").style.display = "block";
+      }
+    }
   }
   openModal("#movieFormModal");
 }
@@ -1155,10 +1247,20 @@ function attachFilePreviews(){
     if(!inp) return;
     const prev = document.getElementById(inp.dataset.preview);
     if(!prev || !inp.files?.length) return;
-    const url = URL.createObjectURL(inp.files[0]);
-    prev.src = url; prev.style.display = "block";
+    prev.src = URL.createObjectURL(inp.files[0]);
+    prev.style.display = "block";
   });
-  document.querySelectorAll(".file-drop").forEach(drop => {
+  // Video info display
+  document.addEventListener("change", e => {
+    if(e.target.id === "mfVideoInput" && e.target.files?.[0]){
+      const f = e.target.files[0];
+      const mb = (f.size/1048576).toFixed(1);
+      const info = $("#videoInfo");
+      info.textContent = `📁 ${f.name} — ${mb} MB`;
+      info.style.display = "block";
+    }
+  });
+  document.querySelectorAll(".file-drop").forEach(drop=>{
     drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("dragover"); });
     drop.addEventListener("dragleave", () => drop.classList.remove("dragover"));
     drop.addEventListener("drop", e => { e.preventDefault(); drop.classList.remove("dragover"); });
@@ -1193,6 +1295,27 @@ function attachEvents(){
     const rb = e.target.closest("[data-row]"); if(rb) scrollRow(rb.dataset.row, Number(rb.dataset.dir));
   });
 
+  /* =========================================================
+     CRITICAL FIX: use closest() for close button because SVG
+     inside the button captures the click event target.
+     ========================================================= */
+  document.addEventListener("click", e => {
+    // Close button — works whether you click the button or the SVG inside
+    const closeBtn = e.target.closest("[data-close]");
+    if(closeBtn){
+      e.preventDefault();
+      e.stopPropagation();
+      const modal = closeBtn.closest(".modal");
+      if(modal) closeModal("#" + modal.id);
+      return;
+    }
+    // Click on backdrop closes modal
+    if(e.target.classList && e.target.classList.contains("modal")){
+      closeModal("#" + e.target.id);
+      return;
+    }
+  });
+
   document.addEventListener("click", e => {
     const fav = e.target.closest("[data-fav]"); if(fav){ e.stopPropagation(); toggleWatchlist(Number(fav.dataset.fav)); return; }
     const q = e.target.closest("[data-quick]"); if(q){ e.stopPropagation(); openDetails(Number(q.dataset.quick)); return; }
@@ -1221,14 +1344,10 @@ function attachEvents(){
     else renderGenrePick(g);
   });
 
-  document.addEventListener("click", e => {
-    if(e.target.matches("[data-close]")){ const m = e.target.closest(".modal"); if(m) closeModal("#"+m.id); }
-    if(e.target.classList.contains("modal")) closeModal("#"+e.target.id);
-  });
   document.addEventListener("keydown", e => {
     if(e.key === "Escape"){
       if($("#searchOverlay").classList.contains("open")) closeSearch();
-      $$(".modal.open").forEach(m => closeModal("#"+m.id));
+      closeAllModals();
     }
   });
 
@@ -1242,12 +1361,11 @@ function attachEvents(){
     renderMoviesView(); toast("Filters reset", "info");
   });
 
-  // Admin login
   $("#adminBtn").addEventListener("click", () => {
     if(ADMIN_TOKEN){
       ADMIN_TOKEN = null; savePrefs();
       toast("Logged out", "info");
-      renderProfile(); $$(".card").forEach(()=>{});
+      renderProfile();
       renderAllWatchlistButtons();
     } else openModal("#loginModal");
   });
@@ -1260,21 +1378,30 @@ function attachEvents(){
       closeModal("#loginModal");
       toast("Welcome, Admin!", "success");
       renderProfile();
-      if(state.currentMovieId) openDetails(state.currentMovieId); // refresh to show edit/delete
     }catch(err){ toast("Wrong password", "error"); }
   });
 
-  // Movie form submit
   $("#movieForm").addEventListener("submit", async e => {
     e.preventDefault();
     if(!ADMIN_TOKEN){ toast("Login required", "error"); return; }
     const form = e.target;
     const fd = new FormData(form);
     fd.set("isNew", $("#mfIsNew").checked ? "true" : "false");
-    // remove empty URL fields if file is uploaded
     if(!fd.get("posterUrl")) fd.delete("posterUrl");
     if(!fd.get("backdropUrl")) fd.delete("backdropUrl");
+    if(!fd.get("videoUrl")) fd.delete("videoUrl");
+    // Remove empty file inputs so backend doesn't complain
+    ["poster","backdrop","video"].forEach(name => {
+      const f = fd.get(name);
+      if(f && typeof f === "object" && f.size === 0) fd.delete(name);
+    });
+
     const editId = form.dataset.editId;
+    const submitBtn = $("#movieFormSubmit");
+    const origText = submitBtn.textContent;
+    submitBtn.textContent = "Uploading…";
+    submitBtn.disabled = true;
+
     try{
       const headers = {"X-Admin-Token": ADMIN_TOKEN};
       const res = await fetch(API + (editId ? `/movies/${editId}` : "/movies"), {
@@ -1284,8 +1411,14 @@ function attachEvents(){
       if(!res.ok) throw new Error((await res.json()).error || "Save failed");
       toast(editId ? "Movie updated" : "Movie added", "success");
       closeModal("#movieFormModal");
-      await loadMovies(); renderHome(); updateStats(); renderAllWatchlistButtons();
-    }catch(err){ toast(err.message, "error"); }
+      await loadMovies();
+      renderHome(); updateStats(); renderAllWatchlistButtons();
+    }catch(err){
+      toast(err.message, "error");
+    }finally{
+      submitBtn.textContent = origText;
+      submitBtn.disabled = false;
+    }
   });
 
   $("#clearWatchlist").addEventListener("click", () => {
@@ -1301,8 +1434,7 @@ function attachEvents(){
     localStorage.removeItem("moviehub_watchlist_v1");
     localStorage.removeItem("moviehub_prefs_v2");
     localStorage.removeItem("moviehub_ratings");
-    state.watchlist = []; state.reducedMotion = false;
-    ADMIN_TOKEN = null;
+    state.watchlist = []; state.reducedMotion = false; ADMIN_TOKEN = null;
     applyTheme("dark");
     renderAllWatchlistButtons(); updateStats(); renderProfile();
     toast("Data reset", "success");
@@ -1329,7 +1461,6 @@ async function init(){
   renderAllWatchlistButtons();
   renderProfile();
   if(ADMIN_TOKEN){
-    // verify token still valid
     try{ await api("/stats"); toast("Signed in as admin", "info"); }
     catch{ ADMIN_TOKEN = null; savePrefs(); renderProfile(); }
   }
